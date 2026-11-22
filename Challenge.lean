@@ -85,7 +85,7 @@ The main result of this project: a finite graph is cop-win if and only if it is
 dismantlable. A vertex `u` of `S` is a **corner**, covered by `w ≠ u`, when
 every vertex of `S` that `u` can step to, `w` can step to as well (`N[u] ⊆ N[w]` inside `S`). A
 set is **dismantlable** when corners can be deleted one at a time until a single vertex is left.
-`IsCorner` and `Dismantlable` are copied unchanged from `CopWin/Dismantlable.lean`.
+`IsCorner` and `Dismantlable` are copied from `CopWin/Dismantlable.lean` with the same bodies.
 
 *Reference:* Nowakowski, R. and Winkler, P. (1983). "Vertex-to-vertex pursuit in a graph."
 *Discrete Math.* 43, pp. 235--239.
@@ -101,12 +101,12 @@ variable {V : Type*} {G : SimpleGraph V}
 def IsCorner (G : SimpleGraph V) (S : Set V) (u w : V) : Prop :=
   u ∈ S ∧ w ∈ S ∧ u ≠ w ∧ ∀ x ∈ S, Step G u x → Step G w x
 
-/-- `S` is dismantlable: it is a single vertex, or it has a corner `u` and `S \ {u}` is
-dismantlable. -/
-inductive Dismantlable (G : SimpleGraph V) : Set V → Prop
-  | single (v : V) : Dismantlable G {v}
-  | corner {S : Set V} {u w : V} :
-      IsCorner G S u w → Dismantlable G (S \ {u}) → Dismantlable G S
+/-- `S` is dismantlable: it lies in every family of sets that contains each single vertex and
+contains `S` whenever it contains `S \ {u}` for a corner `u` of `S`. So the dismantlable sets are
+the single vertices, and the sets with a corner `u` such that `S \ {u}` is dismantlable. -/
+def Dismantlable (G : SimpleGraph V) (S : Set V) : Prop :=
+  ∀ P : Set V → Prop, (∀ v, P {v}) →
+    (∀ (T : Set V) (u w : V), IsCorner G T u w → P (T \ {u}) → P T) → P S
 
 /-- **Nowakowski–Winkler.** A dismantlable finite graph has cop number `1`. -/
 theorem Dismantlable.copNumber_eq_one [Fintype V] [Nonempty V]

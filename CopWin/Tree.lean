@@ -44,7 +44,7 @@ lemma step_induce_iff {s : Set V} {a b : s} : Step (G.induce s) a b ↔ Step G a
 /-- Dismantlability on an induced subgraph carries over to the original graph. -/
 lemma Dismantlable.image_val {s : Set V} {T : Set s} (h : Dismantlable (G.induce s) T) :
     Dismantlable G (Subtype.val '' T) := by
-  induction h with
+  induction h using Dismantlable.induction with
   | single v =>
     rw [Set.image_singleton]
     exact Dismantlable.single _

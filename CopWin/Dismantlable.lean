@@ -44,12 +44,31 @@ variable {V : Type*} {G : SimpleGraph V}
 def IsCorner (G : SimpleGraph V) (S : Set V) (u w : V) : Prop :=
   u ∈ S ∧ w ∈ S ∧ u ≠ w ∧ ∀ x ∈ S, Step G u x → Step G w x
 
-/-- `S` is dismantlable: it is a single vertex, or it has a corner `u` and `S \ {u}` is
-dismantlable. -/
-inductive Dismantlable (G : SimpleGraph V) : Set V → Prop
-  | single (v : V) : Dismantlable G {v}
-  | corner {S : Set V} {u w : V} :
-      IsCorner G S u w → Dismantlable G (S \ {u}) → Dismantlable G S
+/-- `S` is dismantlable: it lies in every family of sets that contains each single vertex and
+contains `S` whenever it contains `S \ {u}` for a corner `u` of `S`. So the dismantlable sets are
+the single vertices, and the sets with a corner `u` such that `S \ {u}` is dismantlable
+(`Dismantlable.single`, `Dismantlable.corner`, `Dismantlable.induction`). -/
+def Dismantlable (G : SimpleGraph V) (S : Set V) : Prop :=
+  ∀ P : Set V → Prop, (∀ v, P {v}) →
+    (∀ (T : Set V) (u w : V), IsCorner G T u w → P (T \ {u}) → P T) → P S
+
+theorem Dismantlable.single (v : V) : Dismantlable G {v} :=
+  fun _ hs _ => hs v
+
+theorem Dismantlable.corner {S : Set V} {u w : V} (hc : IsCorner G S u w)
+    (h : Dismantlable G (S \ {u})) : Dismantlable G S :=
+  fun P hs hcor => hcor S u w hc (h P hs hcor)
+
+/-- Induction on dismantlability. -/
+@[elab_as_elim]
+theorem Dismantlable.induction {motive : ∀ S : Set V, Dismantlable G S → Prop}
+    (single : ∀ v, motive {v} (Dismantlable.single v))
+    (corner : ∀ {S : Set V} {u w : V} (hc : IsCorner G S u w) (h : Dismantlable G (S \ {u})),
+      motive (S \ {u}) h → motive S (Dismantlable.corner hc h))
+    {S : Set V} (h : Dismantlable G S) : motive S h :=
+  (h (fun T => ∃ hT : Dismantlable G T, motive T hT)
+    (fun v => ⟨Dismantlable.single v, single v⟩)
+    (fun _ _ _ hc ⟨hT, ih⟩ => ⟨Dismantlable.corner hc hT, corner hc hT ih⟩)).2
 
 /-- Fold `u` onto `w`, leaving every other vertex where it is. -/
 def fold [DecidableEq V] (u w x : V) : V := if x = u then w else x
@@ -80,7 +99,7 @@ lemma copWinOn_singleton (v : V) : CopWinOn G {v} :=
 
 /-- **Nowakowski–Winkler.** One cop wins on every dismantlable set. -/
 theorem Dismantlable.copWinOn {S : Set V} (h : Dismantlable G S) : CopWinOn G S := by
-  induction h with
+  induction h using Dismantlable.induction with
   | single v => exact copWinOn_singleton v
   | corner hc _ ih =>
     classical
