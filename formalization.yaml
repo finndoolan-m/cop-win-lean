@@ -85,8 +85,9 @@ review:
 
 status:
   scope: >-
-    A full proof of one Formal Conjectures statement, meyniel_conjecture.variants.tree, through the
-    general theorem that dismantlable finite graphs have cop number 1. The converse (cop-win
+    The direction of the Nowakowski-Winkler theorem saying dismantlable finite graphs have cop
+    number 1, stated and checked in Challenge.lean, and as a corollary a full proof of the Formal
+    Conjectures statement meyniel_conjecture.variants.tree. The converse (cop-win
     implies dismantlable) is not formalised. The only sorry is the placeholder in Challenge.lean.
   sorry_count: 0
   sorry_in_definitions: 0
@@ -96,7 +97,18 @@ status:
     - "Quot.sound"
   main_results:
     - description: >-
-        Every finite nonempty connected acyclic graph has cop number 1.
+        Nowakowski-Winkler: a finite nonempty graph whose vertex set is dismantlable has cop
+        number 1.
+      declaration: "CopWin.Dismantlable.copNumber_eq_one"
+      file: "CopWin/Dismantlable.lean"
+      comparator_config: "comparator.json"
+      sorry_count: 0
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
+    - description: >-
+        Corollary: every finite nonempty connected acyclic graph has cop number 1.
       declaration: "MeynielConjecture.meyniel_conjecture.variants.tree"
       file: "Solution.lean"
       comparator_config: "comparator.json"
@@ -105,21 +117,13 @@ status:
         - "propext"
         - "Classical.choice"
         - "Quot.sound"
-    - description: >-
-        Nowakowski-Winkler: a finite nonempty graph whose vertex set is dismantlable has cop
-        number 1.
-      declaration: "CopWin.Dismantlable.copNumber_eq_one"
-      file: "CopWin/Dismantlable.lean"
-      sorry_count: 0
-      axioms:
-        - "propext"
-        - "Classical.choice"
-        - "Quot.sound"
 
 fidelity:
   divergences: >-
-    None in the statement: Challenge.lean is Formal Conjectures' text with its attributes removed,
-    under Formal Conjectures' names. Challenge imports Mathlib rather than FormalConjecturesUtil and
+    None in the tree statement: Challenge.lean is Formal Conjectures' text with its attributes
+    removed, under Formal Conjectures' names. Challenge.lean also states the Nowakowski-Winkler
+    theorem, with IsCorner and Dismantlable copied unchanged from CopWin/Dismantlable.lean, so the
+    comparator checks it against the same game definitions. Challenge imports Mathlib rather than FormalConjecturesUtil and
     builds with Lean v4.35.0-rc3 rather than Formal Conjectures' v4.33.1 (Palomar's minimum). The
     same proof was first checked with Formal Conjectures' Lean v4.33.1 and Mathlib, unchanged.
     The dismantlability notion is defined on vertex subsets of a fixed graph (delete a corner of
@@ -136,7 +140,7 @@ alignment:
       status: "proved"
     - source: "Nowakowski-Winkler (1983), dismantlable graphs are cop-win"
       lean: "CopWin.Dismantlable.copNumber_eq_one"
-      module: "CopWin.Dismantlable"
+      module: "Solution"
       status: "proved"
 
 acknowledgements: >-

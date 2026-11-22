@@ -19,10 +19,12 @@ module
 public import CopWin
 
 /-!
-# Trees have cop number 1: the statement of `Challenge.lean`, proved
+# The statements of `Challenge.lean`, proved
 
-The theorem follows from `CopWin.copNumber_eq_one_of_isTree` in `CopWin/Tree.lean`, which uses the
-Nowakowski–Winkler theorem `CopWin.Dismantlable.copNumber_eq_one`.
+The main result, the Nowakowski–Winkler theorem `CopWin.Dismantlable.copNumber_eq_one`, is proved
+in `CopWin/Dismantlable.lean` (with `IsCorner` and `Dismantlable` defined there) and imported here.
+The tree statement below follows from it through `CopWin.copNumber_eq_one_of_isTree` in
+`CopWin/Tree.lean`.
 -/
 
 @[expose] public section

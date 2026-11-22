@@ -23,8 +23,10 @@ Google DeepMind's [Formal Conjectures](https://github.com/google-deepmind/formal
 
 ## Files
 
-- `Challenge.lean`: the statement, copied from Formal Conjectures at commit `2207c54d`.
-- `Solution.lean`: the proof of the statement.
+- `Challenge.lean`: the statements checked by `comparator.json`: the Nowakowski–Winkler theorem
+  (`CopWin.Dismantlable.copNumber_eq_one`), and the tree statement copied from Formal Conjectures
+  at commit `2207c54d`.
+- `Solution.lean`: the proofs of those statements.
 - `CopWin/Defs.lean`: the game definitions (`Step`, `CopsCatchWithin`, `CopsWin`, `copNumber`),
   copied from Formal Conjectures.
 - `CopWin/Game.lean`: a one-cop game played inside a vertex set, with a bridge lemma showing it

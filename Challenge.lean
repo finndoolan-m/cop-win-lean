@@ -19,7 +19,7 @@ module
 public import Mathlib
 
 /-!
-# Trees have cop number 1
+# Dismantlable graphs are cop-win, and trees have cop number 1
 
 Formal Conjectures' statement `MeynielConjecture.meyniel_conjecture.variants.tree`, copied from
 `FormalConjectures/Wikipedia/MeynielConjecture.lean` at commit
@@ -77,3 +77,39 @@ theorem meyniel_conjecture.variants.tree {V : Type} [Fintype V] [Nonempty V]
   sorry
 
 end MeynielConjecture
+
+/-!
+# Dismantlable graphs are cop-win (Nowakowski–Winkler 1983)
+
+The main result of this project. A vertex `u` of `S` is a **corner**, covered by `w ≠ u`, when
+every vertex of `S` that `u` can step to, `w` can step to as well (`N[u] ⊆ N[w]` inside `S`). A
+set is **dismantlable** when corners can be deleted one at a time until a single vertex is left.
+`IsCorner` and `Dismantlable` are copied unchanged from `CopWin/Dismantlable.lean`.
+
+*Reference:* Nowakowski, R. and Winkler, P. (1983). "Vertex-to-vertex pursuit in a graph."
+*Discrete Math.* 43, pp. 235--239.
+-/
+
+namespace CopWin
+
+open MeynielConjecture
+
+variable {V : Type*} {G : SimpleGraph V}
+
+/-- `u` is a corner of `S`, covered by `w ≠ u`. -/
+def IsCorner (G : SimpleGraph V) (S : Set V) (u w : V) : Prop :=
+  u ∈ S ∧ w ∈ S ∧ u ≠ w ∧ ∀ x ∈ S, Step G u x → Step G w x
+
+/-- `S` is dismantlable: it is a single vertex, or it has a corner `u` and `S \ {u}` is
+dismantlable. -/
+inductive Dismantlable (G : SimpleGraph V) : Set V → Prop
+  | single (v : V) : Dismantlable G {v}
+  | corner {S : Set V} {u w : V} :
+      IsCorner G S u w → Dismantlable G (S \ {u}) → Dismantlable G S
+
+/-- **Nowakowski–Winkler.** A dismantlable finite graph has cop number `1`. -/
+theorem Dismantlable.copNumber_eq_one [Fintype V] [Nonempty V]
+    (h : Dismantlable G Set.univ) : copNumber G = 1 := by
+  sorry
+
+end CopWin

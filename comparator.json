@@ -2,13 +2,16 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
+    "CopWin.Dismantlable.copNumber_eq_one",
     "MeynielConjecture.meyniel_conjecture.variants.tree"
   ],
   "definition_names": [
     "MeynielConjecture.Step",
     "MeynielConjecture.CopsCatchWithin",
     "MeynielConjecture.CopsWin",
-    "MeynielConjecture.copNumber"
+    "MeynielConjecture.copNumber",
+    "CopWin.IsCorner",
+    "CopWin.Dismantlable"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true
