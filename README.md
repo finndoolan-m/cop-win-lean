@@ -1,9 +1,9 @@
 # Dismantlable graphs are cop-win, in Lean 4
 
-First published Lean 4 proof of the Nowakowski–Winkler theorem: in the game of cops and robbers,
-a cop can always catch the robber on any finite dismantlable graph. As a corollary, every finite
-tree has cop number 1, proving `meyniel_conjecture.variants.tree` from Google DeepMind's
-[Formal Conjectures](https://github.com/google-deepmind/formal-conjectures)
+To our knowledge, the first published Lean 4 proof of the Nowakowski–Winkler theorem: in the
+game of cops and robbers, a cop can always catch the robber on any finite dismantlable graph. As
+a corollary, every finite tree has cop number 1, proving `meyniel_conjecture.variants.tree` from
+Google DeepMind's [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures)
 ([statement](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Wikipedia/MeynielConjecture.lean)).
 
 *Reference:* R. Nowakowski and P. Winkler, "Vertex-to-vertex pursuit in a graph",
@@ -23,7 +23,7 @@ tree has cop number 1, proving `meyniel_conjecture.variants.tree` from Google De
 
 ## Files
 
-- `Challenge.lean`: the statement, copied from Formal Conjectures at commit `245cf25a`.
+- `Challenge.lean`: the statement, copied from Formal Conjectures at commit `2207c54d`.
 - `Solution.lean`: the proof of the statement.
 - `CopWin/Defs.lean`: the game definitions (`Step`, `CopsCatchWithin`, `CopsWin`, `copNumber`),
   copied from Formal Conjectures.

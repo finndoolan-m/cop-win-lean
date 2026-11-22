@@ -23,7 +23,7 @@ public import Mathlib
 
 Formal Conjectures' statement `MeynielConjecture.meyniel_conjecture.variants.tree`, copied from
 `FormalConjectures/Wikipedia/MeynielConjecture.lean` at commit
-`245cf25aca527df3d611e139979a4212ebec5f62`, with its `category` and `AMS` attributes removed and
+`2207c54d0dbe960de591d280f997b195bf3f6e28`, with its `category` and `AMS` attributes removed and
 `Mathlib` imported in place of Formal Conjectures' library. The definitions `Step`,
 `CopsCatchWithin`, `CopsWin` and `copNumber` are copied with their bodies unchanged.
 

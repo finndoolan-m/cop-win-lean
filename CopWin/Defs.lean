@@ -23,7 +23,7 @@ public import Mathlib
 
 `Step`, `CopsCatchWithin`, `CopsWin` and `copNumber` are copied unchanged from
 `FormalConjectures/Wikipedia/MeynielConjecture.lean` at commit
-`245cf25aca527df3d611e139979a4212ebec5f62`, so that `Solution.lean` proves exactly the statement
+`2207c54d0dbe960de591d280f997b195bf3f6e28`, so that `Solution.lean` proves exactly the statement
 in `Challenge.lean`.
 -/
 
