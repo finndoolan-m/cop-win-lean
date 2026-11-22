@@ -1,0 +1,15 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "MeynielConjecture.meyniel_conjecture.variants.tree"
+  ],
+  "definition_names": [
+    "MeynielConjecture.Step",
+    "MeynielConjecture.CopsCatchWithin",
+    "MeynielConjecture.CopsWin",
+    "MeynielConjecture.copNumber"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}
