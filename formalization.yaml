@@ -119,8 +119,9 @@ status:
 fidelity:
   divergences: >-
     None in the statement: Challenge.lean is Formal Conjectures' text with its attributes removed,
-    under Formal Conjectures' names, and builds with the same Lean (v4.33.1) and Mathlib as Formal
-    Conjectures at the pinned commit. Challenge imports Mathlib rather than FormalConjecturesUtil.
+    under Formal Conjectures' names. Challenge imports Mathlib rather than FormalConjecturesUtil and
+    builds with Lean v4.35.0-rc3 rather than Formal Conjectures' v4.33.1 (Palomar's minimum). The
+    same proof was first checked with Formal Conjectures' Lean v4.33.1 and Mathlib, unchanged.
     The dismantlability notion is defined on vertex subsets of a fixed graph (delete a corner of
     the induced subgraph on S), which is the usual definition.
 
