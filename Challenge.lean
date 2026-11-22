@@ -79,9 +79,10 @@ theorem meyniel_conjecture.variants.tree {V : Type} [Fintype V] [Nonempty V]
 end MeynielConjecture
 
 /-!
-# Dismantlable graphs are cop-win (Nowakowski–Winkler 1983)
+# Cop-win graphs are exactly the dismantlable graphs (Nowakowski–Winkler 1983)
 
-The main result of this project. A vertex `u` of `S` is a **corner**, covered by `w ≠ u`, when
+The main result of this project: a finite graph is cop-win if and only if it is
+dismantlable. A vertex `u` of `S` is a **corner**, covered by `w ≠ u`, when
 every vertex of `S` that `u` can step to, `w` can step to as well (`N[u] ⊆ N[w]` inside `S`). A
 set is **dismantlable** when corners can be deleted one at a time until a single vertex is left.
 `IsCorner` and `Dismantlable` are copied unchanged from `CopWin/Dismantlable.lean`.
@@ -110,6 +111,12 @@ inductive Dismantlable (G : SimpleGraph V) : Set V → Prop
 /-- **Nowakowski–Winkler.** A dismantlable finite graph has cop number `1`. -/
 theorem Dismantlable.copNumber_eq_one [Fintype V] [Nonempty V]
     (h : Dismantlable G Set.univ) : copNumber G = 1 := by
+  sorry
+
+/-- **Nowakowski–Winkler.** A finite nonempty graph has cop number `1` if and only if it is
+dismantlable. -/
+theorem copNumber_eq_one_iff_dismantlable [Fintype V] [Nonempty V] :
+    copNumber G = 1 ↔ Dismantlable G Set.univ := by
   sorry
 
 end CopWin

@@ -36,3 +36,9 @@ info: 'CopWin.Dismantlable.copNumber_eq_one' depends on axioms: [propext, Classi
 -/
 #guard_msgs in
 #print axioms CopWin.Dismantlable.copNumber_eq_one
+
+/--
+info: 'CopWin.copNumber_eq_one_iff_dismantlable' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms CopWin.copNumber_eq_one_iff_dismantlable

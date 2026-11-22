@@ -2,6 +2,7 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
+    "CopWin.copNumber_eq_one_iff_dismantlable",
     "CopWin.Dismantlable.copNumber_eq_one",
     "MeynielConjecture.meyniel_conjecture.variants.tree"
   ],

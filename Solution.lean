@@ -21,9 +21,12 @@ public import CopWin
 /-!
 # The statements of `Challenge.lean`, proved
 
-The main result, the Nowakowski–Winkler theorem `CopWin.Dismantlable.copNumber_eq_one`, is proved
-in `CopWin/Dismantlable.lean` (with `IsCorner` and `Dismantlable` defined there) and imported here.
-The tree statement below follows from it through `CopWin.copNumber_eq_one_of_isTree` in
+The main result, the Nowakowski–Winkler theorem `CopWin.copNumber_eq_one_iff_dismantlable`, is
+proved in `CopWin/Converse.lean`; its forward direction `CopWin.Dismantlable.copNumber_eq_one` and
+the definitions `IsCorner` and `Dismantlable` are in `CopWin/Dismantlable.lean`. Both are imported
+here.
+
+The tree statement below follows from the forward direction through `CopWin.copNumber_eq_one_of_isTree` in
 `CopWin/Tree.lean`.
 -/
 

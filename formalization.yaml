@@ -3,10 +3,10 @@
 version: "v0.4"
 
 project:
-  name: "Dismantlable graphs are cop-win (Nowakowski-Winkler), and trees have cop number 1"
+  name: "Cop-win graphs are exactly the dismantlable graphs (Nowakowski-Winkler), and trees have cop number 1"
   description: >-
-    A machine-checked proof of the Nowakowski-Winkler theorem in the game of cops and robbers: on
-    a finite dismantlable graph, one cop can always catch the robber. A vertex u is a corner if
+    A machine-checked proof of the Nowakowski-Winkler theorem in the game of cops and robbers: a
+    finite graph has cop number 1 if and only if it is dismantlable. A vertex u is a corner if
     some other vertex w has N[u] contained in N[w] (closed neighbourhoods), and a graph is
     dismantlable if corners can be deleted one at a time until one vertex is left. The proof
     defines a one-cop game played inside a vertex set, with a bridge lemma showing that on the
@@ -14,7 +14,11 @@ project:
     general shadow-map lemma says that if f maps S into T, sends legal moves to legal moves, and
     a cop on f x can reach every vertex the robber can step to from x, then a cop that wins on T
     also wins on S, by chasing the robber's shadow f r. Folding a corner onto the vertex that
-    covers it is such a map, so induction on dismantlability gives the theorem. As a corollary,
+    covers it is such a map, so induction on dismantlability gives one direction. For the
+    converse, following the robber's longest escape gives a corner just before capture: the
+    robber's vertex, covered by the cop's. Folding that corner away is a retract, and a cop that
+    wins on a set also wins on any retract of it by standing on the image of its position, so
+    induction on the number of vertices shows every cop-win finite graph is dismantlable. As a corollary,
     every finite nonempty tree is dismantlable (each leaf is a corner covered by its neighbour)
     and so has cop number 1. This is the statement meyniel_conjecture.variants.tree of Formal
     Conjectures, which marks it research solved. The mathematics is classical and no mathematical
@@ -34,7 +38,7 @@ sources:
     type: "paper"
     location: >-
       Discrete Math. 43 (1983), 235-239. The characterisation of cop-win graphs as dismantlable
-      graphs; this entry formalises the direction dismantlable implies cop-win.
+      graphs; this entry formalises both directions.
     relationship: "formalizes"
     author_endorsement: "n/a"
   - title: "Cop number"
@@ -85,10 +89,10 @@ review:
 
 status:
   scope: >-
-    The direction of the Nowakowski-Winkler theorem saying dismantlable finite graphs have cop
-    number 1, stated and checked in Challenge.lean, and as a corollary a full proof of the Formal
-    Conjectures statement meyniel_conjecture.variants.tree. The converse (cop-win
-    implies dismantlable) is not formalised. The only sorry is the placeholder in Challenge.lean.
+    The Nowakowski-Winkler theorem in both directions (a finite nonempty graph has cop number 1
+    if and only if it is dismantlable), stated and checked in Challenge.lean, and as a corollary a
+    full proof of the Formal Conjectures statement meyniel_conjecture.variants.tree. The only
+    sorries are the statement placeholders in Challenge.lean.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -97,7 +101,18 @@ status:
     - "Quot.sound"
   main_results:
     - description: >-
-        Nowakowski-Winkler: a finite nonempty graph whose vertex set is dismantlable has cop
+        Nowakowski-Winkler: a finite nonempty graph has cop number 1 if and only if its vertex
+        set is dismantlable.
+      declaration: "CopWin.copNumber_eq_one_iff_dismantlable"
+      file: "CopWin/Converse.lean"
+      comparator_config: "comparator.json"
+      sorry_count: 0
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
+    - description: >-
+        Nowakowski-Winkler, forward direction: a finite nonempty graph whose vertex set is dismantlable has cop
         number 1.
       declaration: "CopWin.Dismantlable.copNumber_eq_one"
       file: "CopWin/Dismantlable.lean"
@@ -136,6 +151,10 @@ alignment:
   statements:
     - source: "Formal Conjectures, meyniel_conjecture.variants.tree"
       lean: "MeynielConjecture.meyniel_conjecture.variants.tree"
+      module: "Solution"
+      status: "proved"
+    - source: "Nowakowski-Winkler (1983), cop-win graphs are exactly the dismantlable graphs"
+      lean: "CopWin.copNumber_eq_one_iff_dismantlable"
       module: "Solution"
       status: "proved"
     - source: "Nowakowski-Winkler (1983), dismantlable graphs are cop-win"
